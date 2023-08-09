@@ -1,0 +1,107 @@
+Du commands
+===========
+1.First login to jump server.
+2.login to Altiostar Du by using =ssh root@168.127.12.105
+3.Password =
+4.check the gnodeb status and jigsaw status whether it is running or not by using =kubectl get pods -A
+5.check the sriov0 ethtool link status by using =ip --br link show | grep sriov0
+   ethtool sriov0 | grep "Link detected"
+6.to get the Altiostar mac address =ip link show |grep -i vlan
+7.login to pods(gnodeb)=kubectl get pods -o wide -n -astar
+    kubectl exec -it gnodeb-4545-nrdufr1-1-nrdubaseband-0 -n astar --bash
+8.change the configuration settings on phycfg_xran_fj.xml for this we have to go:
+    cd /opt/ani/etc/
+    ls -ltr phycfg_xran_fj.xml
+9.set bit mask === 0
+                   0
+                   4
+  DL scale ===18886
+  RU Mac ====68:84:7e:fd:96:a7
+
+
+Downlink Configuration
+======================
+1.change configuration settings on maccfgcarr0.xml
+   cd BasicTest/
+    ls ===maccfgcarr0.xml file will appear
+2.DL/UL Bandwidth====20
+                     20
+3.RX/Tx Antenaports===4
+                      4
+4.Tx.Config 4-Layer file and Rx file
+
+     <TxConfig>
+         <SlotNum0>txconfig_0_0_3pla_4Layer_20MHz.xml</SlotNum0>
+          ""
+           ""  
+            ""
+         <SlotNum9>-----------------------------------------
+    
+     </TxConfig>
+     <RxConfig>
+            <SlotNum0>rxconfig_0_0.xml</slotNum0>
+
+             """
+            <SlotNum9>------------------------------
+5.no.of layers are 4
+  antennaports are 4
+
+
+    After these get vendor pod ip for configuring both uplink and PRATCH for that ===kubectl get pods -o wide -n astar
+
+
+
+uplink configuration
+====================
+1. Change the configuration settings on maccfgcarr0.xml
+  Note: RX file is same for all bandwidths{5,10,15,20,25}MHz
+      check PDU,Group,ULsch,ULCch,Rachpresent as below:
+              1
+                   1
+                       1
+                            0
+                                0
+      check layer and antenna ports ==
+                  1
+                    4
+Load the MXG wave form file with uplink configuration and verify JFW switch connections  
+
+2. PUSCH(SNR nTA) Parameters from Du
+
+    Execute tail command for checking SNR status and Rpc ok status
+
+   -------------------------------------------
+
+3. PUSCH CRC prints
+    Execute tail command for checking SNR status and Rpc ok status
+    
+    -----------------------------------------
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
